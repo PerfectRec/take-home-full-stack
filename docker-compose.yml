@@ -1,0 +1,53 @@
+version: '3.8'
+services:
+  www:
+    image: local-www:latest
+    build:
+      context: .
+      target: dev
+    environment:
+      APP_ENV: local
+      APP_NAME: www
+      APP_ID: local-www
+      DB_HOST: db
+      DB_NAME: perfectrec
+      DB_USER: www
+      DB_PASSWORD: dummy
+      DB_PORT: 5432
+      HOME: /home/docker
+    ports:
+      - "3000:3000"
+    shm_size: '2gb'
+    privileged: false
+    volumes:
+      - .:/app
+      - nextBuild:/app/.next
+      - nodeModules:/app/node_modules
+    depends_on:
+      - db
+      - flywayMigrate
+  db:
+    image: postgres:13.6
+    environment:
+      POSTGRES_USER: www
+      POSTGRES_PASSWORD: dummy
+      POSTGRES_DB: perfectrec
+    ports:
+      - "5432:5432"
+    volumes:
+      - dbData:/var/lib/postgresql/data
+  flywayMigrate: &flywayMigrate
+    image: flyway/flyway:7-alpine
+    command: -url=jdbc:postgresql://db:5432/perfectrec -user=www -password=dummy -connectRetries=60 migrate
+    volumes:
+      - ./flyway/data:/flyway/sql/data
+      - ./flyway/schema:/flyway/sql/schema
+    depends_on:
+      - db
+  flywayClean:
+    <<: *flywayMigrate
+    command: -url=jdbc:postgresql://db:5432/perfectrec -user=www -password=dummy -connectRetries=60 clean
+volumes:
+  dbData:
+  nextBuild:
+  nodeModules:

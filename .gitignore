@@ -1,0 +1,14 @@
+# IDEs
+.idea
+.vscode
+
+# NextJS
+.next
+
+# Yarn
+node_modules
+yarn-error.log
+
+# misc
+coverage
+.DS_Store
