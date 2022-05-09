@@ -40,6 +40,7 @@ You only need a machine which can install a modern version of Docker! All local 
    application.
 1. Run `yarn docker:up`
 1. Access the site via http://localhost:3000
+1. Commit your changes as often as you like, and please be sure to push those changes when you're done!
 
 To shell into the running application container, run `yarn docker:shell`.
 
