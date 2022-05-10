@@ -3,6 +3,7 @@
   "scripts": {
     "docker:up": "docker compose up --build www",
     "docker:down": "docker compose down",
+    "docker:db:start": "docker compose up db --detach && docker compose up flywayMigrate",
     "docker:db": "docker compose exec db psql postgresql://www:dummy@db:5432/perfectrec",
     "docker:build": "docker compose build www",
     "docker:flyway:migrate": "docker compose up flywayMigrate",
