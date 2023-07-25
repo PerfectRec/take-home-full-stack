@@ -46,7 +46,7 @@ You only need a machine which can install a modern version of Docker! All local 
    - **OPTIONAL**: Run `yarn` to install dependencies locally. Installing the dependencies locally is only useful for local IDE work (e.g. VSCode) such that it can resolve dependencies. Local dependencies are _not_ used when running the application in Docker.
 1. Run `yarn docker:db:start && yarn docker:up`
 1. Access the site via http://localhost:3000
-1. Commit your changes as often as you like, and please be sure to push those changes when you're done!
+1. Commit your changes as often as you like, and please be sure to commit everything when you're done!
 
 ## Development Tips
 
